@@ -61,7 +61,7 @@ function App() {
 
 <div className="ui equal width form" id="demo-form">
 <div className="fields">
-<div className="field"> */}
+<div className="field"> 
 <img src={Paso1} />
  </div>
 </div>
