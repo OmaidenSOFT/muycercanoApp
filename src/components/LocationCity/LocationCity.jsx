@@ -1,18 +1,14 @@
 import { React, useState, useEffect } from "react";
 import './LocationCity.css';
-
-
-
-import Categories from "../Categories/Categories";
-function LocationCity() {
+const LocationCity = ({handleFetchCategories}) => {
     //Logica
+
 
     const [cities, setCities] = useState([])
     const [selected, setSelected] = useState();
     const [selectedZone, setSelectedZone] = useState();
     const [zones, setZones] = useState([]);
     const [neighborhoods, setNeighborhoods] = useState([]);
-    const [categories, setCategories] = useState([])
     const [selectedNeighborhood, setSelectedNeighborhood] = useState();
     let cityID = 1;
 
@@ -58,7 +54,7 @@ function LocationCity() {
     const handleClick = (e) => {
         e.preventDefault();
         
-        const categories = {
+        const categoriesBody = {
             "Categorias": {
                 "BarrioId": + selectedNeighborhood,
                 "Comercio": "",
@@ -71,13 +67,9 @@ function LocationCity() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(categories)
+            body: JSON.stringify(categoriesBody)
         };
-        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Categorias', options)
-            .then(response => response.json())
-            .then(data => setCategories(data.MCCategorias))
-            // .then(data => console.log(data.MCCategorias))
-            .catch(error => console.error(error));
+        handleFetchCategories(options)
     }
     //jsx
     return (
@@ -132,7 +124,7 @@ function LocationCity() {
 
 
                 <div className="form-group titlesPagesD">
-                    <input class="form-field" type="text" placeholder="Producto(Tornillo, Hamburguesas, Aspirinas, quizas almuerzo corrientes, costilla de res , etc)" />
+                    <input className="form-field" type="text" placeholder="Producto(Tornillo, Hamburguesas, Aspirinas, quizas almuerzo corrientes, costilla de res , etc)" />
                     <span>Producto</span>
                 </div>
 
@@ -152,9 +144,7 @@ function LocationCity() {
                 <a href="" onClick={handleClick} className="button">Buscar</a>
             </div>
 
-            <div className='App app'>
-                <Categories categories={categories} />
-            </div>
+           
 
         </>
 

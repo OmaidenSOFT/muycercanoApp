@@ -2,7 +2,7 @@ import React from "react";
 import Category from "../Category/Category";
 import './Categories.css'
 
-const Categories = ({ categories }) => {    
+const Categories = ({categories}) => {
 
     return (
         <div className="Categories">

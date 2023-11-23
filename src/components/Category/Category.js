@@ -3,10 +3,11 @@ import './Category.css'
 
 const Category = ({ category }) => {
     const { Id, Descripcion, Total, Imagen } = category
+    const myImage = require(`./../../assets/images/ICONOS_APP/${Imagen}`);
        return (
         <div className="Category">
             <img
-                src={Imagen}
+                src={myImage}
                 alt={Descripcion}
             />
             <h3>{Descripcion}</h3>
