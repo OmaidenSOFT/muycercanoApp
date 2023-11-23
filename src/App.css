@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
 .App {
   color:black;
   text-align: center;
@@ -35,3 +36,70 @@ a:hover {
 background-color:#0042cf;
 border-bottom: 2px solid #FFF;
 }
+
+
+body {
+    min-height: 100vh;
+    font-family: 'Mukta Malar', Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #F5F9FF;  
+  
+    
+} 
+.container {
+  padding-top: 50px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: 5rem;
+  color: #d4c6c6;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+  background-color: #165ABC;
+  z-index: 1;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #165ABC;
+    border-radius: 5rem;
+    z-index: -2;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: darken(#0cf, 15%);
+    transition: all .3s;
+    border-radius: 5rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: #da9595;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
+
+
