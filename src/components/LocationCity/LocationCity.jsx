@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import './LocationCity.css';
+import Categories from "../Categories/Categories";
 function LocationCity() {
     //Logica
 
@@ -8,9 +9,10 @@ function LocationCity() {
     const [selectedZone, setSelectedZone] = useState();
     const [zones, setZones] = useState([]);
     const [neighborhoods, setNeighborhoods] = useState([]);
-
+    const [categories, setCategories] = useState([])
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState();
     let cityID = 1;
-    
+
     //API
     useEffect(() => {
         fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Ciudades')
@@ -41,11 +43,45 @@ function LocationCity() {
 
     };
 
+    const handleChangeNeighborhood = event => {
+        setSelectedNeighborhood(event.target.value);
+    };
+
+
+
+
+
+
+    const handleClick = (e) => {
+        e.preventDefault();
+
+
+        const categories = {
+            "Categorias": {
+                "BarrioId": + selectedNeighborhood,
+                "Comercio": "",
+                "Producto": ""
+            }
+        }
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(categories)
+        };
+        fetch('http://localhost:12911/api/MuyCercano/Categorias', options)
+            .then(response => response.json())
+            .then(data => setCategories(data.MCCategorias))
+            // .then(data => console.log(data.MCCategorias))
+            .catch(error => console.error(error));
+    }
     //jsx
     return (
         <>
             <div className="field">
-              
+
                 <div className="form-group titlesPagesD">
                     <select id="cbxCiudad" value={selected} name="cbxCiudad" className="form-field ui search dropdown" onChange={handleChange}>
                         {
@@ -59,7 +95,7 @@ function LocationCity() {
             </div>
 
             <div className="field">
-              
+
                 <div className="form-group titlesPagesD">
                     <select id="cbxLocalidad" value={selectedZone} name="cbxLocalidad" className="form-field ui search dropdown" onChange={handleChangeZone}>
                         <option>Seleccione una zona o lacalidad</option>
@@ -75,7 +111,7 @@ function LocationCity() {
 
             <div className="field">
                 <div className="form-group titlesPagesD">
-                    <select id="cbxBarrio" name="cbxBarrio" className="ui search dropdown form-field">
+                    <select id="cbxBarrio" value={selectedNeighborhood} name="cbxBarrio" className="ui search dropdown form-field" onChange={handleChangeNeighborhood}>
                         <option>Seleccione un barrio</option>
                         {
                             neighborhoods.map(neighborhood => {
@@ -88,6 +124,16 @@ function LocationCity() {
 
 
             </div>
+
+
+            <div className="container">
+                <a href="" onClick={handleClick} className="button">Buscar</a>
+            </div>
+
+            <div className='App app'>
+                <Categories categories={categories}  />
+            </div>
+
         </>
 
 

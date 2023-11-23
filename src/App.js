@@ -1,7 +1,12 @@
+import { React, useEffect, useState } from 'react'
+
+
 import LocationTitle from './components/LocationTitle/LocationTitle';
 import LocationCity from './components/LocationCity/LocationCity';
 import LocationTrade from './components/LocationTrade/LocationTrade';
 import LocationProduct from './components/LocationProduct/LocationProduct';
+import Categories from './components/Categories/Categories';
+
 
 import './App.css';
 
@@ -37,27 +42,35 @@ function App() {
         </div>
 
 
-
+{/* 
         <div className="fields">
           <LocationTrade></LocationTrade>
         </div>
 
         <div className="fields">
           <LocationProduct></LocationProduct>
-        </div>
+        </div> */}
       </div>
-      
+{/* 
       <div className="container">
         <a href="#" className="button">Buscar</a>
-        </div>  
-        
+      </div> */}
+
+      {/* <div className='App app'>
+        <Categories products={products} addToCart={addProductsToCart} />
+      </div> */}
+
+
+
+
+      {/*         
         <div className="ui equal width form" id="demo-form">
         <div className="fields">
           <div className="field">
             <img src={Paso1} />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
