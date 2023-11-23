@@ -10,10 +10,10 @@ function LocationCity() {
     const [neighborhoods, setNeighborhoods] = useState([]);
 
     let cityID = 1;
-
+    
     //API
     useEffect(() => {
-        fetch('http://localhost:12911/api/MuyCercano/Ciudades')
+        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Ciudades')
             .then(response => response.json())
             .then(data => setCities(data.MCCiudad))
     }, [])
@@ -22,7 +22,7 @@ function LocationCity() {
         setSelected(event.target.value);
         cityID = event.target.value;
 
-        fetch('http://localhost:12911/api/MuyCercano/Localidades?ciudadId=' + cityID)
+        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Localidades?ciudadId=' + cityID)
             .then(response => response.json())
             .then(data => setZones(data.MCLocalidad))
             .catch(error => console.error(error));
@@ -34,7 +34,7 @@ function LocationCity() {
         setSelectedZone(event.target.value);
         const zoneID = event.target.value;
         console.log(zoneID);
-        fetch('http://localhost:12911/api/MuyCercano/Barrios?zonaId=' + zoneID)
+        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Barrios?zonaId=' + zoneID)
             .then(response => response.json())
             .then(data => setNeighborhoods(data.MCBarrios))
             .catch(error => console.error(error));
