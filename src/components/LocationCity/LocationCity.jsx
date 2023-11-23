@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import './LocationCity.css';
+import url from "../../Data/url";
 const LocationCity = ({handleFetchCategories}) => {
     //Logica
 
@@ -14,7 +15,7 @@ const LocationCity = ({handleFetchCategories}) => {
 
     //API
     useEffect(() => {
-        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Ciudades')
+        fetch(`${url}Ciudades`)
             .then(response => response.json())
             .then(data => setCities(data.MCCiudad))
     }, [])
@@ -23,7 +24,7 @@ const LocationCity = ({handleFetchCategories}) => {
         setSelected(event.target.value);
         cityID = event.target.value;
 
-        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Localidades?ciudadId=' + cityID)
+        fetch(`${url}Localidades?ciudadId=${cityID}`)
             .then(response => response.json())
             .then(data => setZones(data.MCLocalidad))
             .catch(error => console.error(error));
@@ -35,7 +36,7 @@ const LocationCity = ({handleFetchCategories}) => {
         setSelectedZone(event.target.value);
         const zoneID = event.target.value;
         console.log(zoneID);
-        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Barrios?zonaId=' + zoneID)
+        fetch(`${url}Barrios?zonaId=${zoneID}`)
             .then(response => response.json())
             .then(data => setNeighborhoods(data.MCBarrios))
             .catch(error => console.error(error));
