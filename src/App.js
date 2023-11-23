@@ -3,8 +3,7 @@ import { React, useEffect, useState } from 'react'
 
 import LocationTitle from './components/LocationTitle/LocationTitle';
 import LocationCity from './components/LocationCity/LocationCity';
-import LocationTrade from './components/LocationTrade/LocationTrade';
-import LocationProduct from './components/LocationProduct/LocationProduct';
+
 import Categories from './components/Categories/Categories';
 
 
@@ -40,26 +39,7 @@ function App() {
         <div className="fields">
           <LocationCity></LocationCity>
         </div>
-
-
-{/* 
-        <div className="fields">
-          <LocationTrade></LocationTrade>
-        </div>
-
-        <div className="fields">
-          <LocationProduct></LocationProduct>
-        </div> */}
       </div>
-{/* 
-      <div className="container">
-        <a href="#" className="button">Buscar</a>
-      </div> */}
-
-      {/* <div className='App app'>
-        <Categories products={products} addToCart={addProductsToCart} />
-      </div> */}
-
 
 
 

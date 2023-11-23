@@ -1,5 +1,8 @@
 import { React, useState, useEffect } from "react";
 import './LocationCity.css';
+
+
+
 import Categories from "../Categories/Categories";
 function LocationCity() {
     //Logica
@@ -54,8 +57,7 @@ function LocationCity() {
 
     const handleClick = (e) => {
         e.preventDefault();
-
-
+        
         const categories = {
             "Categorias": {
                 "BarrioId": + selectedNeighborhood,
@@ -71,7 +73,7 @@ function LocationCity() {
             },
             body: JSON.stringify(categories)
         };
-        fetch('http://localhost:12911/api/MuyCercano/Categorias', options)
+        fetch('http://186.154.144.132:82/pprotecc/muyCercanoBackend/api/MuyCercano/Categorias', options)
             .then(response => response.json())
             .then(data => setCategories(data.MCCategorias))
             // .then(data => console.log(data.MCCategorias))
@@ -84,6 +86,7 @@ function LocationCity() {
 
                 <div className="form-group titlesPagesD">
                     <select id="cbxCiudad" value={selected} name="cbxCiudad" className="form-field ui search dropdown" onChange={handleChange}>
+                    <option>Seleccione Ciudad</option>
                         {
                             cities.map(city => {
                                 return <option key={city.Id} value={city.Id}>{city.Ciudad}</option>
@@ -124,14 +127,33 @@ function LocationCity() {
 
 
             </div>
+            <div className="field">
 
 
+
+                <div className="form-group titlesPagesD">
+                    <input class="form-field" type="text" placeholder="Producto(Tornillo, Hamburguesas, Aspirinas, quizas almuerzo corrientes, costilla de res , etc)" />
+                    <span>Producto</span>
+                </div>
+
+                <div className="field">
+
+
+                    <div className="form-group titlesPagesD">
+                        <input className="form-field" type="text" placeholder="Tipo de comercio(Ferreteria, drogueria, comodas rápidas, etc)" />
+                        <span>Comercio</span>
+                    </div>
+                </div>
+
+            </div>
+
+{/* //Boton Buscar */}
             <div className="container">
                 <a href="" onClick={handleClick} className="button">Buscar</a>
             </div>
 
             <div className='App app'>
-                <Categories categories={categories}  />
+                <Categories categories={categories} />
             </div>
 
         </>

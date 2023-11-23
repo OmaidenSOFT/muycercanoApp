@@ -3,8 +3,7 @@ import './Category.css'
 
 const Category = ({ category }) => {
     const { Id, Descripcion, Total, Imagen } = category
-    console.log(category)
-    return (
+       return (
         <div className="Category">
             <img
                 src={Imagen}
