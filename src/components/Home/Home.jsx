@@ -1,8 +1,10 @@
 import  {React, useState } from "react";
+import Swal from 'sweetalert2';
 import LocationCity from "../LocationCity/LocationCity";
 import Categories from "../Categories/Categories";
 import './Home.css'
 import url from "../../Data/url";
+import Logo from "../../../src/assets/images/logoROJOPNG.png"
 
 
 const Home = ()=>{
@@ -20,7 +22,7 @@ const Home = ()=>{
             <Categories categories={categories}/>
         )}
     else {
-        return (
+        return (         
             <>
                     <div className="fields">
                         <h1 className="titlesPages">En donde estas ubicado</h1>
@@ -28,6 +30,7 @@ const Home = ()=>{
                     <div className="fields">
                         <LocationCity handleFetchCategories={handleCategories} ></LocationCity>
                     </div>
+
                 </>
         )
     }

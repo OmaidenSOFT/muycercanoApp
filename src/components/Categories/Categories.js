@@ -3,8 +3,9 @@ import Category from "../Category/Category";
 import './Categories.css'
 
 const Categories = ({categories}) => {
-
-    return (
+      return (
+        <>
+        <h3>Categorias de Comercios para el barrio</h3>
         <div className="Categories">
             {
                 categories.map(category => (
@@ -15,6 +16,7 @@ const Categories = ({categories}) => {
                 ))
             }
         </div>
+        </>
     )
 }
 

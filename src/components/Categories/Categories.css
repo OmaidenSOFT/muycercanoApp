@@ -1,9 +1,17 @@
 .Categories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px
+    gap: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(165, 125, 125, 0.1);
 }
 
+.Categories h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
 .Category {
     background-color: #FFF;
     padding: 20px;

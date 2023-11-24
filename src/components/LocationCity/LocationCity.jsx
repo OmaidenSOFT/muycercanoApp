@@ -1,7 +1,7 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import './LocationCity.css';
 import url from "../../Data/url";
-const LocationCity = ({handleFetchCategories}) => {
+const LocationCity = ({ handleFetchCategories }) => {
     //Logica
 
 
@@ -10,7 +10,9 @@ const LocationCity = ({handleFetchCategories}) => {
     const [selectedZone, setSelectedZone] = useState();
     const [zones, setZones] = useState([]);
     const [neighborhoods, setNeighborhoods] = useState([]);
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState();
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState();   
+    const merchantRef = useRef(null)
+    const productRef = useRef(null)
     let cityID = 1;
 
     //API
@@ -46,23 +48,21 @@ const LocationCity = ({handleFetchCategories}) => {
     const handleChangeNeighborhood = event => {
         setSelectedNeighborhood(event.target.value);
     };
-
-
-
-
-
-
-    const handleClick = (e) => {
-        e.preventDefault();
+    
+    const handleClick= async () =>  {
         
+        const merchanValue = merchantRef.current.value
+        const productValue = productRef.current.value
+        
+        
+     
         const categoriesBody = {
             "Categorias": {
                 "BarrioId": + selectedNeighborhood,
-                "Comercio": "",
-                "Producto": ""
+                "Comercio": `${merchanValue}`,
+                "Producto": `${productValue}`
             }
         }
-
         const options = {
             method: 'POST',
             headers: {
@@ -79,7 +79,7 @@ const LocationCity = ({handleFetchCategories}) => {
 
                 <div className="form-group titlesPagesD">
                     <select id="cbxCiudad" value={selected} name="cbxCiudad" className="form-field ui search dropdown" onChange={handleChange}>
-                    <option>Seleccione Ciudad</option>
+                        <option>Seleccione Ciudad</option>
                         {
                             cities.map(city => {
                                 return <option key={city.Id} value={city.Id}>{city.Ciudad}</option>
@@ -94,7 +94,7 @@ const LocationCity = ({handleFetchCategories}) => {
 
                 <div className="form-group titlesPagesD">
                     <select id="cbxLocalidad" value={selectedZone} name="cbxLocalidad" className="form-field ui search dropdown" onChange={handleChangeZone}>
-                        <option>Seleccione una zona o lacalidad</option>
+                        <option>Seleccione una zona o localidad</option>
                         {
                             zones.map(zone => {
                                 return <option key={zone.Id} value={zone.Id}>{zone.Localidad}</option>
@@ -120,32 +120,34 @@ const LocationCity = ({handleFetchCategories}) => {
 
 
             </div>
-            <div className="field">
-
-
-
-                <div className="form-group titlesPagesD">
-                    <input className="form-field" type="text" placeholder="Producto(Tornillo, Hamburguesas, Aspirinas, quizas almuerzo corrientes, costilla de res , etc)" />
-                    <span>Producto</span>
-                </div>
+  
 
                 <div className="field">
-
-
                     <div className="form-group titlesPagesD">
-                        <input className="form-field" type="text" placeholder="Tipo de comercio(Ferreteria, drogueria, comodas rápidas, etc)" />
-                        <span>Comercio</span>
+                        <input className="form-field" type="text" placeholder="Producto(Tornillo, Hamburguesas, Aspirinas, quizas almuerzo corrientes, costilla de res , etc)" ref={productRef} />
+                        <span>Producto</span>
                     </div>
+
+                    <div className="field">
+
+
+                        <div className="form-group titlesPagesD">
+                            <input type="text" className="form-field" placeholder="Tipo de comercio(Ferreteria, drogueria, comodas rápidas, etc)" ref={merchantRef} />
+                            <span>Comercio</span>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
 
-{/* //Boton Buscar */}
-            <div className="container">
-                <a href="" onClick={handleClick} className="button">Buscar</a>
-            </div>
 
-           
+
+                {/* //Boton Buscar */}
+                <div className="container">
+                    <button type="submit" onClick={handleClick} className="button" >Buscar</button>
+                </div>
+        
+
 
         </>
 
