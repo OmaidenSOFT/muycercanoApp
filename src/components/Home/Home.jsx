@@ -4,7 +4,7 @@ import LocationCity from "../LocationCity/LocationCity";
 import Categories from "../Categories/Categories";
 import './Home.css'
 import url from "../../Data/url";
-import Logo from "../../../src/assets/images/logoROJOPNG.png"
+
 
 
 const Home = ()=>{
@@ -22,6 +22,7 @@ const Home = ()=>{
             <Categories categories={categories}/>
         )}
     else {
+
         return (         
             <>
                     <div className="fields">
