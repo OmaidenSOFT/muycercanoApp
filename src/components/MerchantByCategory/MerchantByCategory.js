@@ -3,8 +3,9 @@ import './MerchantByCategory.css'
 const MerchantByCategory = ({ merchantcategory }) => {
     console.log(merchantcategory)
     const { Id, Nombre , Direccion,TelDomicilio1,Logo, Horario, ManejaDomicilio} = merchantcategory
-    const myImage = require(`./../../assets/images/ICONOS_APP/BELLEZA.png`);
+    const myImage = require(`./../../assets/images/ICONOS_APP/merchant.png`);
     const myImageDelivery = require(`./../../assets/images/domicilio.png`);
+    const notImageDelivery = require(`./../../assets/images/notDelivery.jpg`);
     
     const maybeRenderDeliveryImg =()=> {
         if ( ManejaDomicilio ) {
@@ -12,7 +13,7 @@ const MerchantByCategory = ({ merchantcategory }) => {
         }
         else
         {
-            return <h3>No tenemos domicilio</h3>;
+            return <img src={notImageDelivery} alt={Nombre} />;
         }
     }
     
