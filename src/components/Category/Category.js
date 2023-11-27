@@ -10,7 +10,7 @@ const Category = ({ category }) => {
 
     const handleClick = async () => {
         const barrioId = localStorage.getItem('barrioId')
-
+        
         const merchanbycategoriesBody = {
             "ComerciosxCategorias": {
                 "BarrioId": + barrioId,
@@ -33,8 +33,8 @@ const Category = ({ category }) => {
     const showContent = () => {
         if (merchanbyCategories.length > 0) {
             return (
-                <MerchantByCategories merchantCategories={merchanbyCategories} />
-            )
+               <MerchantByCategories merchantCategories={merchanbyCategories} />
+               )
         }
         else {
             return (

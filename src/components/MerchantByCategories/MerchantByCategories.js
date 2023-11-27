@@ -3,8 +3,9 @@ import MerchantByCategory from "../MerchantByCategory/MerchantByCategory";
 import './MerchantByCategories.css'
 
 const MerchantByCategories = ({ merchantCategories }) => {
-    
+    console.log(merchantCategories)
     return (
+
         <>
             <h3>Comercios para el barrio</h3>
             

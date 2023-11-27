@@ -2,6 +2,7 @@ import  {React, useState } from "react";
 import Swal from 'sweetalert2';
 import LocationCity from "../LocationCity/LocationCity";
 import Categories from "../Categories/Categories";
+import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
 import './Home.css'
 import url from "../../Data/url";
 
