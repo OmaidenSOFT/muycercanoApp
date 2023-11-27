@@ -1,35 +1,35 @@
-.Categories {
+.MerchantByCategories {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px
 }
 
-.Category {
+.MerchantByCategory {
     background-color: #FFF;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.Category img {
+.MerchantByCategory img {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
     border: 4px;
 }
 
-.Category h3 {
+.MerchantByCategory h3 {
     font-size: 18px;
     margin: 10px 0;
     color: #333;
 }
 
-.Category p {
+.MerchantByCategory p {
     font-size: 16px;
     color: #777;
 }
 
-.Category button {
+.MerchantByCategory button {
     background-color: #3498db;
     color: #FFF;
     border: none;

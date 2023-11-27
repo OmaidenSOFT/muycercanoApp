@@ -7,6 +7,7 @@ const Categories = ({categories}) => {
         <>
         <h3>Categorias de Comercios para el barrio</h3>
         <div className="Categories">
+            <div className="Categories">
             {
                 categories.map(category => (
                     <Category
@@ -15,6 +16,8 @@ const Categories = ({categories}) => {
                         />
                 ))
             }
+            </div>
+            {/* <div >aca van las promociones</div> */}
         </div>
         </>
     )

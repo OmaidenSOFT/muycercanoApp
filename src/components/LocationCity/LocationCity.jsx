@@ -54,7 +54,7 @@ const LocationCity = ({ handleFetchCategories }) => {
         const merchanValue = merchantRef.current.value
         const productValue = productRef.current.value
         
-        
+        localStorage.setItem('barrioId', selectedNeighborhood)
      
         const categoriesBody = {
             "Categorias": {
