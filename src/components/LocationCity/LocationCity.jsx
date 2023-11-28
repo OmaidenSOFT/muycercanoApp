@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef } from "react";
 import './LocationCity.css';
 import url from "../../Data/url";
+import Paso1 from '../../assets/images/paso1.png';
 const LocationCity = ({ handleFetchCategories }) => {
     //Logica
 
@@ -149,7 +150,7 @@ const LocationCity = ({ handleFetchCategories }) => {
                 </div>
         
 
-
+<img src={Paso1} alt="Paso 1"/>
         </>
 
 

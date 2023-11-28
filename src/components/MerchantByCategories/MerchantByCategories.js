@@ -1,7 +1,7 @@
 import React from "react";
 import MerchantByCategory from "../MerchantByCategory/MerchantByCategory";
 import './MerchantByCategories.css'
-
+import Paso2 from '../../assets/images/paso2.png';
 const MerchantByCategories = ({ merchantCategories }) => {
     console.log(merchantCategories)
     return (
@@ -19,7 +19,7 @@ const MerchantByCategories = ({ merchantCategories }) => {
                         ))
                     }
                 </div>
-            
+                <img src={Paso2} alt="Paso 2"/>
         </>
     )
 }

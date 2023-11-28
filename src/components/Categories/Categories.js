@@ -2,6 +2,7 @@ import {React, useState} from "react";
 import Category from "../Category/Category";
 import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
 import url from "../../Data/url";
+import Paso2 from '../../assets/images/paso2.png';
 import './Categories.css'
 
 const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
@@ -26,7 +27,7 @@ const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
     } else {
         return (
             <>
-        <h3>Categorias de Comercios para el barrio { nameNeighborhood.toLowerCase() }</h3>
+        <h3>Categorias de Comercios para el barrio <em>{ nameNeighborhood.toLowerCase() }</em></h3>
         <div className="Categories">
             <div className="Categories">
             {
@@ -42,6 +43,7 @@ const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
             </div>
             {/* <div >aca van las promociones</div> */}
         </div>
+        <img src={Paso2} alt="Paso 2"/>
         </>
         )
     }
