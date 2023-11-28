@@ -9,8 +9,13 @@ import url from "../../Data/url";
 
 
 const Home = ()=>{
+    const [neighborhoodId, setNeighborhoodId] = useState();
+    const [nameNeighborhood, setNameNeighborhood] = useState("")
     const [categories,setCategories] = useState([]);
-    const handleCategories = (options) =>{
+    const handleCategories = (options, nameNeighborhood) =>{
+        setNeighborhoodId(JSON.parse(options.body).Categorias.BarrioId)
+        setNameNeighborhood(nameNeighborhood)
+        console.log("#nameN",nameNeighborhood)
         fetch(`${url}Categorias`, options)
             .then(response => response.json())
             .then(data => setCategories(data.MCCategorias))
@@ -20,7 +25,7 @@ const Home = ()=>{
    const showContent = ()=>{
     if (categories.length > 0){
         return (
-            <Categories categories={categories}/>
+            <Categories categories={categories} neighborhoodId={neighborhoodId} nameNeighborhood={ nameNeighborhood }/>
         )}
     else {
 

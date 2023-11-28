@@ -10,7 +10,8 @@ const LocationCity = ({ handleFetchCategories }) => {
     const [selectedZone, setSelectedZone] = useState();
     const [zones, setZones] = useState([]);
     const [neighborhoods, setNeighborhoods] = useState([]);
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState();   
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState(); 
+    const [nameNeighborhood, setNameNeighborhood] = useState("")  
     const merchantRef = useRef(null)
     const productRef = useRef(null)
     let cityID = 1;
@@ -46,15 +47,15 @@ const LocationCity = ({ handleFetchCategories }) => {
     };
 
     const handleChangeNeighborhood = event => {
-        setSelectedNeighborhood(event.target.value);
+        const selectedOption = event.target.selectedOptions[0];
+        setNameNeighborhood(selectedOption.text);
+        setSelectedNeighborhood(selectedOption.value);
     };
     
     const handleClick= async () =>  {
         
         const merchanValue = merchantRef.current.value
         const productValue = productRef.current.value
-        
-        localStorage.setItem('barrioId', selectedNeighborhood)
      
         const categoriesBody = {
             "Categorias": {
@@ -70,7 +71,7 @@ const LocationCity = ({ handleFetchCategories }) => {
             },
             body: JSON.stringify(categoriesBody)
         };
-        handleFetchCategories(options)
+        handleFetchCategories(options, nameNeighborhood)
     }
     //jsx
     return (

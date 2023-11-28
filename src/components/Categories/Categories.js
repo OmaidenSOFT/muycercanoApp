@@ -4,8 +4,9 @@ import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
 import url from "../../Data/url";
 import './Categories.css'
 
-const Categories = ({categories}) => {
+const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
     const [merchanbyCategories, setmerchanbyCategories] = useState([])
+    
 
 
  const handleMerchandByCategories = (options) => {
@@ -25,7 +26,7 @@ const Categories = ({categories}) => {
     } else {
         return (
             <>
-        <h3>Categorias de Comercios para el barrio</h3>
+        <h3>Categorias de Comercios para el barrio { nameNeighborhood.toLowerCase() }</h3>
         <div className="Categories">
             <div className="Categories">
             {
@@ -33,7 +34,8 @@ const Categories = ({categories}) => {
                     <Category
                         key={ category.Id } 
                         category={ category }
-                        handleMerchand={ handleMerchandByCategories }
+                        handleMerchant={ handleMerchandByCategories }
+                        neighborhoodId={ neighborhoodId }
                         />
                 ))
             }

@@ -3,13 +3,13 @@ import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
 import url from "../../Data/url";
 import './Category.css'
 
-const Category = ({ category, handleMerchand }) => {
+const Category = ({ category, handleMerchant, neighborhoodId }) => {
     const { Id, Descripcion, Total, Imagen } = category
     const myImage = require(`./../../assets/images/ICONOS_APP/${Imagen}`);
     const [merchanbyCategories, setmerchanbyCategories] = useState([])
 
     const handleClick = () => {
-        const barrioId = localStorage.getItem('barrioId')
+        const barrioId = neighborhoodId
         
         const merchanbycategoriesBody = {
             "ComerciosxCategorias": {
@@ -24,7 +24,7 @@ const Category = ({ category, handleMerchand }) => {
             },
             body: JSON.stringify(merchanbycategoriesBody)
         };
-        handleMerchand(options);
+        handleMerchant(options);
        
     }
 
