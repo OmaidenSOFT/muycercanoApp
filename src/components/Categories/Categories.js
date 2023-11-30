@@ -22,7 +22,7 @@ const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
  const showContent = () => {
     if(merchanbyCategories.length > 0){
         return (
-            <MerchantByCategories merchantCategories={merchanbyCategories} />
+            <MerchantByCategories merchantCategories={merchanbyCategories} nameNeighborhood={ nameNeighborhood.toLowerCase() } />
         )
     } else {
         return (

@@ -1,12 +1,9 @@
-import { React, useState } from "react";
-import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
-import url from "../../Data/url";
+import { React } from "react";
 import './Category.css'
 
 const Category = ({ category, handleMerchant, neighborhoodId }) => {
     const { Id, Descripcion, Total, Imagen } = category
     const myImage = require(`./../../assets/images/ICONOS_APP/${Imagen}`);
-    const [merchanbyCategories, setmerchanbyCategories] = useState([])
 
     const handleClick = () => {
         const barrioId = neighborhoodId
@@ -28,15 +25,10 @@ const Category = ({ category, handleMerchant, neighborhoodId }) => {
        
     }
 
-    const showContent = () => {
-        if (merchanbyCategories.length > 0) {
-            return (
-               <MerchantByCategories merchantCategories={merchanbyCategories} />
-               )
-        }
-        else {
-            return (
-                <div className="Category">
+
+    return (
+        <div className="demo-form">
+             <div className="Category">
                     <img
                         src={myImage}
                         alt={Descripcion}
@@ -49,14 +41,6 @@ const Category = ({ category, handleMerchant, neighborhoodId }) => {
                         Seleccionar
                     </button>
                 </div>
-
-            )
-        }
-    }
-
-    return (
-        <div className="demo-form">
-            {showContent()}
         </div>
     )
 }

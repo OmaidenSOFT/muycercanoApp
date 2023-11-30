@@ -13,6 +13,7 @@ import IPromo from './assets/images/Ipromo.png';
 import IRegistro from './assets/images/Iregistro.png';
 import Home from './components/Home/Home';
 import Categories from './components/Categories/Categories';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <nav className="navbar" id="navbar">
           <ul>
             <li><NavLink to="/"><img src={Logo} /> <img src={Necesitas} /></NavLink></li>
-            <li><a href="#"><img src={IRegistro} /></a></li>
+            <li><NavLink to="/Register"><img src={IRegistro} /></NavLink></li>
             <li><a href="#"><img src={Iacerca} /></a></li>
             <li><a href="#"><img src={IPromo} /></a></li>
           </ul>
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={ <Home/> }/>
           <Route path="/Categories" element={ <Categories/> }/>
+          <Route path="/Register" element={ <Register/> }/>
         </Routes>
     
 

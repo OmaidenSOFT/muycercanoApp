@@ -141,10 +141,6 @@ const LocationCity = ({ handleFetchCategories }) => {
 
                 </div>
 
-
-
-
-                {/* //Boton Buscar */}
                 <div className="container">
                     <button type="submit" onClick={handleClick} className="button" >Buscar</button>
                 </div>

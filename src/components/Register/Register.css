@@ -1,0 +1,27 @@
+.form-register{
+    margin: 40px 15px 40px;
+}
+.form-group span {
+    width: 10rem;
+}
+.button.register{
+    margin-top: 3rem;
+}
+.form-group-upload{
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #CDD9ED;
+    flex: 1;
+    cursor: pointer;
+    color: var(--group-color);
+}
+.align-right{
+    justify-content: flex-end;
+    align-items: center;
+}
+.form-group-radio{
+    margin-right: 10px;
+}
+input[type="file"]{
+    display: none;
+}
