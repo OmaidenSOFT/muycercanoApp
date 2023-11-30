@@ -1,0 +1,40 @@
+.Merchant {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    display: flex;
+}
+
+.Merchant img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border: 4px;
+}
+
+.Merchant h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.Merchant p {
+    font-size: 16px;
+    color: #777;
+}
+
+.Merchant button {
+    background-color: #3498db;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.demo-form{
+    margin-top: 20px;
+}
