@@ -2,6 +2,8 @@ import {React, useState, useEffect} from "react"
 import url from "../../Data/url"
 import './Register.css'
 import Swal from "sweetalert2"
+import firebase from '../../Data/firebase'
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 
 const Register = ()=>{
     const [cities, setCities] = useState([])
@@ -31,6 +33,8 @@ const Register = ()=>{
         email: '',
         password: ''
     })
+    const auth = getAuth(firebase)
+    
 
 
     useEffect(() => {
@@ -119,7 +123,7 @@ const Register = ()=>{
     }
     console.log("form", formData);
     
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         const validation = Object.keys(formData).every((key) => 
         {   
@@ -132,17 +136,8 @@ const Register = ()=>{
             formDataObject.forEach(entity => {
                 console.log("#entity",entity);
             });
-            fetch(`${url}CrearComercio`, {
-                method: 'POST',
-                body: formDataObject,
-              })
-                .then(response => response.json())
-                .then(data => {
-                  console.log(data);
-                })
-                .catch(error => {
-                  console.error('Error:', error);
-                });
+            await createUser(auth, formData.email, formData.password);
+            
         }else{
             Swal.fire({
                 title: 'Error',
@@ -151,6 +146,25 @@ const Register = ()=>{
                 confirmButtonText: 'Okay',
               });
         }
+
+        
+    }
+
+    const createUser = async (authFirebase, email, password) =>  {
+        createUserWithEmailAndPassword(authFirebase, email, password)
+        .then((userCredential) => {
+            Swal.fire(
+                'Done!',
+                'User Registered',
+                'success'
+            )
+        }).catch(error => {
+            Swal.fire(
+                'Ups',
+                `Error: ${ error.message }`,
+                'error'
+            )
+        })
     }
 
     return (

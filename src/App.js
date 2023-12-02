@@ -14,6 +14,7 @@ import IRegistro from './assets/images/Iregistro.png';
 import Home from './components/Home/Home';
 import Categories from './components/Categories/Categories';
 import Register from './components/Register/Register';
+import Login from './components/Login/Login';
 
 function App() {
   return (
@@ -26,12 +27,15 @@ function App() {
             <li><NavLink to="/Register"><img src={IRegistro} /></NavLink></li>
             <li><a href="#"><img src={Iacerca} /></a></li>
             <li><a href="#"><img src={IPromo} /></a></li>
+            <li><NavLink to="/Login" className="navbar-login">Login</NavLink></li>
+
           </ul>
         </nav>
         <Routes>
           <Route exact path="/" element={ <Home/> }/>
           <Route path="/Categories" element={ <Categories/> }/>
           <Route path="/Register" element={ <Register/> }/>
+          <Route path="/Login" element={ <Login/> }/>
         </Routes>
     
 
