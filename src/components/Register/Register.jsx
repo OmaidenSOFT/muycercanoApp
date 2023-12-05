@@ -1,19 +1,23 @@
-import {React, useState, useEffect} from "react"
+import { React, useState, useEffect } from "react"
+import axios from "axios"
 import url from "../../Data/url"
 import './Register.css'
 import Swal from "sweetalert2"
 import firebase from '../../Data/firebase'
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { async } from "@firebase/util"
 
-const Register = ()=>{
+const Register = () => {
     const [cities, setCities] = useState([])
     const [categories, setCategories] = useState([])
     const [selectedCity, setSelectedCity] = useState()
     const [zones, setZones] = useState([]);
     const [selectedZone, setSelectedZone] = useState();
     const [neighborhoods, setNeighborhoods] = useState([]);
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState(); 
+    const [selectedNeighborhood, setSelectedNeighborhood] = useState();
     const [nameNeighborhood, setNameNeighborhood] = useState("")
+    const [registredError, setRegistredError] = useState("");
+
     const [formData, setFormData] = useState({
         merchantName: '',
         logo: null,
@@ -34,7 +38,7 @@ const Register = ()=>{
         password: ''
     })
     const auth = getAuth(firebase)
-    
+
 
 
     useEffect(() => {
@@ -50,27 +54,27 @@ const Register = ()=>{
 
     const handleFileChange = (event) => {
         const file = event.target.files[0]
-        if(!!file){
-            if (file.type === 'image/jpeg' || file.type === 'image/png'){
-                setFormData((prevData)=>({
+        if (!!file) {
+            if (file.type === 'image/jpeg' || file.type === 'image/png') {
+                setFormData((prevData) => ({
                     ...prevData,
                     ["logo"]: event.target.files[0]
                 }));
-            }else {
+            } else {
                 Swal.fire({
                     title: 'Error',
                     text: 'Debe escoger el formato correcto de imagen (jpeg o png)',
                     icon: 'error',
                     confirmButtonText: 'Okay',
                 });
-                
+
             }
         }
-       
+
     }
 
     const handleSelectedCategory = event => {
-        setFormData((prevData)=>({
+        setFormData((prevData) => ({
             ...prevData,
             ["category"]: event.target.value
         }))
@@ -78,7 +82,7 @@ const Register = ()=>{
 
     const handleSelectedCity = event => {
         setSelectedCity(event.target.value);
-        setFormData((prevData)=>({
+        setFormData((prevData) => ({
             ...prevData,
             ["city"]: event.target.value
         }))
@@ -90,10 +94,10 @@ const Register = ()=>{
             .catch(error => console.error(error));
 
     };
-    
+
     const handleSelectedZone = event => {
         setSelectedZone(event.target.value);
-        setFormData((prevData)=>({
+        setFormData((prevData) => ({
             ...prevData,
             ["zone"]: event.target.value
         }))
@@ -108,174 +112,266 @@ const Register = ()=>{
         const selectedOption = event.target.selectedOptions[0];
         setNameNeighborhood(selectedOption.text);
         setSelectedNeighborhood(selectedOption.value);
-        setFormData((prevData)=>({
+        setFormData((prevData) => ({
             ...prevData,
             ["neighborhood"]: event.target.value
         }))
     };
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     }
-    console.log("form", formData);
-    
+
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const validation = Object.keys(formData).every((key) => 
-        {   
-            return true });
-        if (validation){
+        const validation = Object.keys(formData).every((key) => {
+            return true
+        });
+        if (validation) {
             const formDataObject = new FormData();
             Object.keys(formData).forEach((key) => {
-                formDataObject.append(key,formData[key]);
+                formDataObject.append(key, formData[key]);
             });
-            formDataObject.forEach(entity => {
-                console.log("#entity",entity);
-            });
-            await createUser(auth, formData.email, formData.password);
-            
-        }else{
+           
+            const usercreated = await createUser(auth, formData.email, formData.password);
+
+            // console.log(registredError)
+           
+            // if (usercreated) {
+
+            //     alert("1")
+            //     // const comercioBody = {
+            //     //     "CrearComercio": {
+            //     //         "Nombrecomercio": `${formData.merchantName}`,
+            //     //         "Logo": "",
+            //     //         "Direccion": `${formData.address}`,
+            //     //         "BarrioId": `${formData.neighborhood}`,
+            //     //         "TelDomicilio1": `${formData.phone1}`,
+            //     //         "TelDomicilio2": `${formData.phone2}`,
+            //     //         "TelDomicilio3": `${formData.phone3}`,
+            //     //         "Horario": `${formData.available}`,
+            //     //         "ManejaDomicilio": `${formData.hasDelivery}`,
+            //     //         "Categoriaid": `${formData.category}`,
+            //     //         "Facebook": `${formData.facebook}`,
+            //     //         "Instagram": `${formData.merchantName}`,
+            //     //         "Youtube": `${formData.youtube}`,
+            //     //         "Contacto": `${formData.email}`,
+            //     //         "Email": `${formData.email}`,
+            //     //         "Password": `${formData.pa}`,
+            //     //     }
+            //     // };
+            //     // const options = {
+            //     //     method: 'POST',
+            //     //     headers: {
+            //     //         'Content-Type': 'application/json'
+            //     //     },
+            //     //     body: JSON.stringify(comercioBody)
+            //     // };
+            //     // const responseApi = await axios.post(`${url}CrearComercio`, comercioBody)
+            //     // if (responseApi.data.MCMCCrearComercio.Id !== 0) {
+            //     //     await Swal.fire(
+            //     //         'Bien hecho!',
+            //     //         'Su comercio ha sido registrado con exito',
+            //     //         'success'
+            //     //     )
+            //     // }
+            //     // else {
+            //     //     await Swal.fire(
+            //     //         'Ups ocurrío un error!',
+            //     //         { registredError },
+            //     //         'success'
+            //     //     )
+            //     // }
+
+            // }
+            // else {
+            //     alert("2")
+            //     // await Swal.fire(
+            //     //     'Ups ocurrío un error!',
+            //     //     `${registredError}`,
+            //     //     'error'
+            //     // )
+            // }
+        } else {
             Swal.fire({
                 title: 'Error',
                 text: 'Formulario incompleto',
                 icon: 'error',
                 confirmButtonText: 'Okay',
-              });
+            });
         }
-
-        
     }
 
-    const createUser = async (authFirebase, email, password) =>  {
-        createUserWithEmailAndPassword(authFirebase, email, password)
-        .then((userCredential) => {
-            Swal.fire(
-                'Done!',
-                'User Registered',
-                'success'
-            )
-        }).catch(error => {
-            Swal.fire(
-                'Ups',
-                `Error: ${ error.message }`,
-                'error'
-            )
-        })
+    const createUser = async(authFirebase, email, password) => {
+         createUserWithEmailAndPassword(authFirebase, email, password)
+            .then( async (userCredential) => {
+                const comercioBody = {
+                    "CrearComercio": {
+                        "Nombrecomercio": `${formData.merchantName}`,
+                        "Logo": "",
+                        "Direccion": `${formData.address}`,
+                        "BarrioId": `${formData.neighborhood}`,
+                        "TelDomicilio1": `${formData.phone1}`,
+                        "TelDomicilio2": `${formData.phone2}`,
+                        "TelDomicilio3": `${formData.phone3}`,
+                        "Horario": `${formData.available}`,
+                        "ManejaDomicilio": `${formData.hasDelivery}`,
+                        "Categoriaid": `${formData.category}`,
+                        "Facebook": `${formData.facebook}`,
+                        "Instagram": `${formData.merchantName}`,
+                        "Youtube": `${formData.youtube}`,
+                        "Contacto": `${formData.email}`,
+                        "Email": `${formData.email}`,
+                        "Password": `${formData.pa}`,
+                    }
+                };
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(comercioBody)
+                };
+                const responseApi = await axios.post(`${url}CrearComercio`, comercioBody)
+                console.log(responseApi)
+                if (responseApi.data.MCMCCrearComercio.Id !== 0) {
+                    Swal.fire(
+                        'Bien hecho!',
+                        'Su comercio ha sido registrado con exito',
+                        'success'
+                    )
+                }
+                else {
+                     Swal.fire(
+                        'Ups ocurrío un error!',
+                        `Error`,
+                        'error'
+                    )
+                }
+            })
+            .catch( error => {
+                Swal.fire(
+                    'Ups ocurrío un error!',
+                    `${error}`,
+                    'error'
+                )
+                })
     }
 
     return (
         <form className="form-register" onSubmit={handleFormSubmit}>
             <div className="form-group">
-                <input type="text" name="merchantName" placeholder="nombre del comercio"  className="form-field" onBlur={handleInputChange}/>
+                <input type="text" name="merchantName" placeholder="nombre del comercio" className="form-field" onBlur={handleInputChange} />
                 <span>Comercio</span>
             </div>
-            <div className="form-group align-right">
-                 <label htmlFor="fileInput" className="form-group-upload">Subir Logo { !!formData.logo ? ` - ${formData.logo.name}` : " - no se ha seleccionado archivo"}</label>
-                    <input id="fileInput" type="file" onChange={ handleFileChange }/>
+            {/* <div className="form-group align-right">
+                <label htmlFor="fileInput" className="form-group-upload">Subir Logo {!!formData.logo ? ` - ${formData.logo.name}` : " - no se ha seleccionado archivo"}</label>
+                <input id="fileInput" type="file" onChange={handleFileChange} />
                 <span>logo</span>
-            </div>
+            </div> */}
             <div className="form-group">
-                <input type="text" name="address" placeholder="Digite Direccion" className="form-field" onBlur={handleInputChange}/>
+                <input type="text" name="address" placeholder="Digite Direccion" className="form-field" onBlur={handleInputChange} />
                 <span>direccion</span>
             </div>
             <div className="form-group">
-                    <select id="categories" name="categories" className="form-field ui search dropdown" onChange={handleSelectedCategory}>
-                        <option>Seleccione Categoria</option>
-                            {
-                                categories.map(category => (
-                                    <option key={category.Id} value={category.Id}>{category.Descripcion}</option>
-                                ))
-                            }
-                    </select>
-                    <span>Categoria</span>
-          </div>
+                <select id="categories" name="categories" className="form-field ui search dropdown" onChange={handleSelectedCategory}>
+                    <option>Seleccione Categoria</option>
+                    {
+                        categories.map(category => (
+                            <option key={category.Id} value={category.Id}>{category.Descripcion}</option>
+                        ))
+                    }
+                </select>
+                <span>Categoria</span>
+            </div>
             <div className="form-group">
-                    <select id="cbxCiudad" value={selectedCity} name="cbxCiudad" className="form-field ui search dropdown" onChange={handleSelectedCity}>
-                        <option>Seleccione Ciudad</option>
-                        {
-                            cities.map(city => {
-                                return <option key={city.Id} value={city.Id}>{city.Ciudad}</option>
-                            })
-                        }
-                    </select>
-                    <span>Ciudad</span>
-          </div>
-          <div className="form-group">
-                    <select id="cbxLocalidad" value={selectedZone} name="cbxLocalidad" className="form-field ui search dropdown" onChange={handleSelectedZone}>
-                        <option>Seleccione una zona o localidad</option>
-                        {
-                            zones.map(zone => {
-                                return <option key={zone.Id} value={zone.Id}>{zone.Localidad}</option>
-                            })
-                        }
-                    </select>
-                    <span> Zonas</span>
-                </div>
+                <select id="cbxCiudad" value={selectedCity} name="cbxCiudad" className="form-field ui search dropdown" onChange={handleSelectedCity}>
+                    <option>Seleccione Ciudad</option>
+                    {
+                        cities.map(city => {
+                            return <option key={city.Id} value={city.Id}>{city.Ciudad}</option>
+                        })
+                    }
+                </select>
+                <span>Ciudad</span>
+            </div>
+            <div className="form-group">
+                <select id="cbxLocalidad" value={selectedZone} name="cbxLocalidad" className="form-field ui search dropdown" onChange={handleSelectedZone}>
+                    <option>Seleccione una zona o localidad</option>
+                    {
+                        zones.map(zone => {
+                            return <option key={zone.Id} value={zone.Id}>{zone.Localidad}</option>
+                        })
+                    }
+                </select>
+                <span> Zonas</span>
+            </div>
 
-        <div className="form-group">
-            <select id="cbxBarrio" value={selectedNeighborhood} name="cbxBarrio" className="ui search dropdown form-field" onChange={handleSelectedNeighborhood}>
-                <option>Seleccione un barrio</option>
-                {
-                    neighborhoods.map(neighborhood => {
-                        return <option key={neighborhood.Id} value={neighborhood.Id}>{neighborhood.Barrio}</option>
-                    })
-                }
-            </select>
-            <span>Barrio</span>
-        </div>
+            <div className="form-group">
+                <select id="cbxBarrio" value={selectedNeighborhood} name="cbxBarrio" className="ui search dropdown form-field" onChange={handleSelectedNeighborhood}>
+                    <option>Seleccione un barrio</option>
+                    {
+                        neighborhoods.map(neighborhood => {
+                            return <option key={neighborhood.Id} value={neighborhood.Id}>{neighborhood.Barrio}</option>
+                        })
+                    }
+                </select>
+                <span>Barrio</span>
+            </div>
 
-        <div className="form-group">
-                <input type="phone" name="phone1" placeholder="Digite telefono" className="form-field" onChange={handleInputChange}/>
+            <div className="form-group">
+                <input type="phone" name="phone1" placeholder="Digite telefono" className="form-field" onChange={handleInputChange} />
                 <span>telefono #1</span>
-        </div>
-        <div className="form-group">
-                <input type="phone" name="phone2" placeholder="Digite telefono" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="phone" name="phone2" placeholder="Digite telefono" className="form-field" onChange={handleInputChange} />
                 <span>telefono #2</span>
-        </div>
-        <div className="form-group">
-                <input type="phone" name="phone3" placeholder="Digite telefono" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="phone" name="phone3" placeholder="Digite telefono" className="form-field" onChange={handleInputChange} />
                 <span>telefono #3</span>
-        </div>
-        <div className="form-group">
+            </div>
+            <div className="form-group">
                 <textarea className="form-field" name="available" placeholder="Digite horario" onChange={handleInputChange}></textarea>
                 <span>Horario</span>
-        </div>
-        <div className="form-group align-right">
-            <label className="form-group-radio">
-                <input type="radio" name="hasDelivery" value="si" onChange={handleInputChange}/>
-                Si
-            </label>
-            <label className="form-group-radio">
-                <input type="radio"  name="hasDelivery" value="no" onChange={handleInputChange} />
-                No
-            </label>
-            <span>Tiene Domicilio</span>
-        </div>
-        <div className="form-group">
-                <input type="text" name="facebook" placeholder="Ingresar facebook" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group align-right">
+                <label className="form-group-radio">
+                    <input type="radio" name="hasDelivery" value="si" onChange={handleInputChange} />
+                    Si
+                </label>
+                <label className="form-group-radio">
+                    <input type="radio" name="hasDelivery" value="no" onChange={handleInputChange} />
+                    No
+                </label>
+                <span>Tiene Domicilio</span>
+            </div>
+            <div className="form-group">
+                <input type="text" name="facebook" placeholder="Ingresar facebook" className="form-field" onChange={handleInputChange} />
                 <span>Facebook</span>
-        </div>
-        <div className="form-group">
-                <input type="text" name="instagram" placeholder="Ingresar instagram" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="text" name="instagram" placeholder="Ingresar instagram" className="form-field" onChange={handleInputChange} />
                 <span>Instagram</span>
-        </div>
-        <div className="form-group">
-                <input type="text" name="youtube" placeholder="Ingresar youtube" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="text" name="youtube" placeholder="Ingresar youtube" className="form-field" onChange={handleInputChange} />
                 <span>Youtube</span>
-        </div>
-        <div className="form-group">
-                <input type="email" name="email" placeholder="Ingresar email" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="email" name="email" placeholder="Ingresar email" className="form-field" onChange={handleInputChange} />
                 <span>Email</span>
-        </div>
-        <div className="form-group">
-                <input type="password" name="password" placeholder="Ingresar password" className="form-field" onChange={handleInputChange}/>
+            </div>
+            <div className="form-group">
+                <input type="password" name="password" placeholder="Ingresar password" className="form-field" onChange={handleInputChange} />
                 <span>Password</span>
-        </div>
-        <button type="submit" className="button register">Registrar</button>
+            </div>
+            <button type="submit" className="button register">Registrar</button>
 
         </form>
     )
