@@ -6,6 +6,7 @@ import Swal from "sweetalert2"
 import firebase from '../../Data/firebase'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { async } from "@firebase/util"
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [cities, setCities] = useState([])
@@ -17,7 +18,7 @@ const Register = () => {
     const [selectedNeighborhood, setSelectedNeighborhood] = useState();
     const [nameNeighborhood, setNameNeighborhood] = useState("")
     const [registredError, setRegistredError] = useState("");
-
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         merchantName: '',
         logo: null,
@@ -245,6 +246,7 @@ const Register = () => {
                         'Su comercio ha sido registrado con exito',
                         'success'
                     )
+                    navigate('/')
                 }
                 else {
                      Swal.fire(

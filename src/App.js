@@ -11,6 +11,7 @@ import Necesitas from './assets/images/necesitas.png';
 import Iacerca from './assets/images/Iacerca.png';
 import IPromo from './assets/images/Ipromo.png';
 import IRegistro from './assets/images/Iregistro.png';
+import ILogin from './assets/images/Ilogin.png';
 import Home from './components/Home/Home';
 import Categories from './components/Categories/Categories';
 import Register from './components/Register/Register';
@@ -25,9 +26,9 @@ function App() {
           <ul>
             <li><NavLink to="/"><img src={Logo} /> <img src={Necesitas} /></NavLink></li>
             <li><NavLink to="/Register"><img src={IRegistro} /></NavLink></li>
-            <li><a href="#"><img src={Iacerca} /></a></li>
-            <li><a href="#"><img src={IPromo} /></a></li>
-            <li><NavLink to="/Login" className="navbar-login">Login</NavLink></li>
+            {/* <li><a href="#"><img src={Iacerca} /></a></li>
+            <li><a href="#"><img src={IPromo} /></a></li> */}
+            <li><NavLink to="/Login"><img src={ILogin}/></NavLink></li>
 
           </ul>
         </nav>
