@@ -2,11 +2,16 @@
     color:black;
     text-align: center;
 }
-.titlesPagesD {
-    color:black;
+.demo-form{
+    margin-top: 20px;
+}
+.titlesPages{
+    color: #FC0505;
     text-align: center;
 }
-
+.location-step1{
+    margin-bottom: 3rem;
+}
 
 
 

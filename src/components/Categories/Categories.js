@@ -27,6 +27,7 @@ const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
     } else {
         return (
             <>
+        <img src={Paso2} alt="Paso 2" className="categories-step"/>
         <h3>Categorias de Comercios para el barrio <em>{ nameNeighborhood.toLowerCase() }</em></h3>
         <div className="Categories">
             <div className="Categories">
@@ -43,7 +44,7 @@ const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
             </div>
             {/* <div >aca van las promociones</div> */}
         </div>
-        <img src={Paso2} alt="Paso 2"/>
+        
         </>
         )
     }

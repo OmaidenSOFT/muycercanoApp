@@ -77,6 +77,11 @@ const LocationCity = ({ handleFetchCategories }) => {
     //jsx
     return (
         <>
+            <img src={Paso1} alt="Paso 1" className="location-step1"/>
+
+            <div className="fields">
+                        <h1 className="titlesPages">En donde estas ubicado</h1>
+                    </div>
             <div className="field">
 
                 <div className="form-group titlesPagesD">
@@ -145,8 +150,6 @@ const LocationCity = ({ handleFetchCategories }) => {
                     <button type="submit" onClick={handleClick} className="button" >Buscar</button>
                 </div>
         
-
-<img src={Paso1} alt="Paso 1"/>
         </>
 
 
