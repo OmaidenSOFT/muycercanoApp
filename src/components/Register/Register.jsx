@@ -17,7 +17,6 @@ const Register = () => {
     const [neighborhoods, setNeighborhoods] = useState([]);
     const [selectedNeighborhood, setSelectedNeighborhood] = useState();
     const [nameNeighborhood, setNameNeighborhood] = useState("")
-    const [registredError, setRegistredError] = useState("");
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         merchantName: '',
@@ -138,66 +137,8 @@ const Register = () => {
             Object.keys(formData).forEach((key) => {
                 formDataObject.append(key, formData[key]);
             });
-           
+            
             const usercreated = await createUser(auth, formData.email, formData.password);
-
-            // console.log(registredError)
-           
-            // if (usercreated) {
-
-            //     alert("1")
-            //     // const comercioBody = {
-            //     //     "CrearComercio": {
-            //     //         "Nombrecomercio": `${formData.merchantName}`,
-            //     //         "Logo": "",
-            //     //         "Direccion": `${formData.address}`,
-            //     //         "BarrioId": `${formData.neighborhood}`,
-            //     //         "TelDomicilio1": `${formData.phone1}`,
-            //     //         "TelDomicilio2": `${formData.phone2}`,
-            //     //         "TelDomicilio3": `${formData.phone3}`,
-            //     //         "Horario": `${formData.available}`,
-            //     //         "ManejaDomicilio": `${formData.hasDelivery}`,
-            //     //         "Categoriaid": `${formData.category}`,
-            //     //         "Facebook": `${formData.facebook}`,
-            //     //         "Instagram": `${formData.merchantName}`,
-            //     //         "Youtube": `${formData.youtube}`,
-            //     //         "Contacto": `${formData.email}`,
-            //     //         "Email": `${formData.email}`,
-            //     //         "Password": `${formData.pa}`,
-            //     //     }
-            //     // };
-            //     // const options = {
-            //     //     method: 'POST',
-            //     //     headers: {
-            //     //         'Content-Type': 'application/json'
-            //     //     },
-            //     //     body: JSON.stringify(comercioBody)
-            //     // };
-            //     // const responseApi = await axios.post(`${url}CrearComercio`, comercioBody)
-            //     // if (responseApi.data.MCMCCrearComercio.Id !== 0) {
-            //     //     await Swal.fire(
-            //     //         'Bien hecho!',
-            //     //         'Su comercio ha sido registrado con exito',
-            //     //         'success'
-            //     //     )
-            //     // }
-            //     // else {
-            //     //     await Swal.fire(
-            //     //         'Ups ocurrío un error!',
-            //     //         { registredError },
-            //     //         'success'
-            //     //     )
-            //     // }
-
-            // }
-            // else {
-            //     alert("2")
-            //     // await Swal.fire(
-            //     //     'Ups ocurrío un error!',
-            //     //     `${registredError}`,
-            //     //     'error'
-            //     // )
-            // }
         } else {
             Swal.fire({
                 title: 'Error',
