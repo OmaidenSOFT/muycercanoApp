@@ -1,47 +1,26 @@
-import  {React, useState } from "react";
+import  {React } from "react";
 import LocationCity from "../LocationCity/LocationCity";
-import Categories from "../Categories/Categories";
 import './Home.css'
 import url from "../../Data/url";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Home = ()=>{
-    const [neighborhoodId, setNeighborhoodId] = useState();
-    const [nameNeighborhood, setNameNeighborhood] = useState("")
-    const [categories,setCategories] = useState([]);
+    const navigate = useNavigate();
     const handleCategories = (options, nameNeighborhood) =>{
-        setNeighborhoodId(JSON.parse(options.body).Categorias.BarrioId)
-        setNameNeighborhood(nameNeighborhood)
-        console.log("#nameN",nameNeighborhood)
         fetch(`${url}Categorias`, options)
             .then(response => response.json())
-            .then(data => setCategories(data.MCCategorias))
+            .then((data)=> navigate('categories',{state: {categories: data.MCCategorias, neighborhoodId: JSON.parse(options.body).Categorias.BarrioId, nameNeighborhood: nameNeighborhood}}))
             .catch(error => console.error(error));    
     }
 
-   const showContent = ()=>{
-    if (categories.length > 0){
-        return (
-            <Categories categories={categories} neighborhoodId={neighborhoodId} nameNeighborhood={ nameNeighborhood }/>
-        )}
-    else {
-
-        return (         
-            
-                    <div className="fields">
-                        <LocationCity handleFetchCategories={handleCategories} ></LocationCity>
-                    </div>
-
-                
-        )
-    }
-    
-   }
 
     return(
             <div className="demo-form">
-                {showContent()}
+                  <div className="fields">
+                        <LocationCity handleFetchCategories={handleCategories} ></LocationCity>
+                    </div>
             </div>
     )
 

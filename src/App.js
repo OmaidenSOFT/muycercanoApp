@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 import './App.css';
 
 import Logo from './assets/images/logoROJOPNG.png'
-import Paso1 from './assets/images/paso1.png';
 import Necesitas from './assets/images/necesitas.png';
 import Iacerca from './assets/images/Iacerca.png';
 import IPromo from './assets/images/Ipromo.png';
@@ -37,6 +36,7 @@ function App() {
           <Route path="/Categories" element={ <Categories/> }/>
           <Route path="/Register" element={ <Register/> }/>
           <Route path="/Login" element={ <Login/> }/>
+          <Route path="/Categories" element={ <Categories/> }/>
         </Routes>
     
 

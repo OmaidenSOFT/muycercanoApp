@@ -4,9 +4,13 @@ import MerchantByCategories from "../MerchantByCategories/MerchantByCategories";
 import url from "../../Data/url";
 import Paso2 from '../../assets/images/paso2.png';
 import './Categories.css'
+import { useLocation } from "react-router-dom";
 
-const Categories = ({categories, neighborhoodId, nameNeighborhood}) => {
+const Categories = () => {
     const [merchanbyCategories, setmerchanbyCategories] = useState([])
+    const location = useLocation()
+    const {categories, neighborhoodId, nameNeighborhood} = location.state
+    console.log(categories,neighborhoodId,nameNeighborhood);
     
 
 
